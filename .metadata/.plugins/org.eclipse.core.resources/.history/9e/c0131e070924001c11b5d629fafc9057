@@ -1,0 +1,44 @@
+package controller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import model.StudentVO;
+
+public class StudentDAO {
+
+	public void setStudentRegiste(StudentVO svo) throws Exception {
+		
+		String sql = "insert into student values(student_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, svo.getSd_num());
+			pstmt.setString(2, svo.getSd_name());
+			pstmt.setString(3, svo.getSd_id());
+			pstmt.setString(4, svo.getSd_passwd());
+			pstmt.setString(5, svo.getS_num());
+			pstmt.setString(6, svo.getSd_birthday());
+			pstmt.setString(7, svo.getSd_phone());
+			pstmt.setString(8, svo.getSd_address());
+			pstmt.setString(9, svo.getSd_email());
+			
+			int i = pstmt.executeUpdate();
+			
+			if (i == 1) {
+				System.out.println(svo.getSd_name() + " 학생 등록 완료.");
+				System.out.println("학생 등록 성공!!!");
+			}
+			else {
+				System.out.println("학생 등록 실패!!!");
+			}
+		} catch (SQLException se) {
+			System.out.println(" se = [" + se + "]");
+		}
+				
+	}
+}

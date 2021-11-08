@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import jdk.internal.org.jline.utils.InputStreamReader;
+
+public class StatementExam {
+
+	public static void main(String[] args) {
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "hr";
+		String password = "1234";
+		
+		BufferedReader in_empno = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			Class.forName("orcle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			System.out.println("드라이버 로딩 에러 : " + e1.toString());
+			return;
+		} catch (SQLException e2) {
+			System.out.println("서버 연결 실패 : " + e2.toString());
+			return;
+		}
+		
+		
+
+	}
+
+}

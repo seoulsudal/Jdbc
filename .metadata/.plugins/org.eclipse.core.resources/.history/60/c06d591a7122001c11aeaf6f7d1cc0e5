@@ -1,0 +1,63 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class StatementExam {
+
+	public static void main(String[] args) {
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "hr";
+		String password = "1234";
+		
+		BufferedReader in_empno = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			Class.forName("orcle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			System.out.println("드라이버 로딩 에러 : " + e1.toString());
+			return;
+		} catch (Exception e2) {
+			System.out.println("서버 연결 실패 : " + e2.toString());
+			return;
+		}
+		
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+			BufferedReader empno;
+			
+			System.out.println("사원번호 입력 : ");
+			empno = in_empno;
+			
+			String sql = "selcet first_name, job_id, salary from employees where employee_id = " + empno;
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				System.out.println("First_name : " + rs.getString(1) + "   Job_id : " + rs.getString(2) + "   sal" + rs.getString(3));
+			}
+		} catch (Exception e) {
+			System.out.println("실패!! : " e.getMessage());
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+	}
+
+}

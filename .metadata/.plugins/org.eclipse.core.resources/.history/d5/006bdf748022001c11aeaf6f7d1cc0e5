@@ -1,0 +1,37 @@
+import view.MENU_CHOICE;
+import view.MenuViewer;
+
+public class UniversityRegisterCoursesMain {
+
+	public static void main(String[] args) {
+
+		mainmenu();
+
+	}
+	
+	public static void mainmenu() {
+		
+		int choiceNum;
+		
+		while(true) {
+			try {
+				MenuViewer.mainMenuView();
+				choiceNum = MenuViewer.choice.nextInt();
+				MenuViewer.choice.nextLine();
+				
+				switch (choiceNum) {
+				case MENU_CHOICE.SUBJECT :
+					subjectmenu();
+					break;
+				}
+			}
+		}
+	}
+	
+	public static void subjectMenu() throws Exception {
+		int choice;
+		
+		subjectRegisterManager subjectManager = new SubjectReg
+	}
+
+}

@@ -1,0 +1,41 @@
+package controller;
+
+import java.util.Scanner;
+
+import model.StudentVO;
+
+public class StudentRegisterManager {
+
+	// 학생 정보 등록
+	public void studentRegistr() throws Exception {
+		
+		Scanner input = new Scanner(System.in);
+		
+		SubjectDAO sdao = new SubjectDAO();
+		StudentDAO sd = new StudentDAO();
+		StudentVO sVo = new StudentVO();
+		
+		String sd_num;
+		String sd_name;
+		String sd_id;
+		String sd_passwd;
+		String s_num;
+		String sd_birthday;
+		String sd_phone;
+		String sd_address;
+		String sd_email;
+		
+		boolean id_check;
+		String year;
+		
+		System.out.println("학생 정보 입력");
+		System.out.print("성명 : ");
+		sd_name = input.nextLine();
+		
+		do {
+			System.out.print("아이디(8자 이상 12자 이내) : ");
+			sd_id = input.nextLine();
+			id_check = sd.getStudentIdOverlap(sd_id);
+		}
+	}
+}
